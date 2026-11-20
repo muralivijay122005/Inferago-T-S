@@ -35,7 +35,7 @@
   --color-accent-orange: var(--color-accent-orange);
   --color-accent-sand: var(--color-accent-sand);
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-geist-sans);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -51,7 +51,6 @@ body {
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans);
-  font-feature-settings: "cv11", "ss01", "ss03";
 }
 
 h1, h2, h3 {

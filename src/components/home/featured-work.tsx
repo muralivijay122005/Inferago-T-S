@@ -32,9 +32,9 @@ export function FeaturedWork() {
 
         {featured.length > 0 ? (
           <Stagger stagger={0.12} className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {featured.map((project) => (
+            {featured.map((project, i) => (
               <StaggerItem key={project.slug}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} index={i} />
               </StaggerItem>
             ))}
           </Stagger>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
+import { ArrowUpRight, Check, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { DitherField } from "@/components/ui/dither-field";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { CTASection } from "@/components/shared/cta-section";
 import { TechnologyBadge } from "@/components/shared/technology-badge";
+import { projectHost } from "@/components/portfolio/project-card";
 import { PROJECTS } from "@/data/projects";
 
 export function generateStaticParams() {
@@ -85,15 +85,34 @@ export default async function CaseStudyPage({
         </Container>
       </section>
 
-      <section className="pb-12">
-        <Container>
-          <div className="card p-2.5">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] bg-bg-secondary">
-              <Image src={project.coverImage} alt={`${project.name} website`} fill preload sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover object-top" />
-            </div>
-          </div>
-        </Container>
-      </section>
+      {project.clientUrl && (
+        <section className="pb-12">
+          <Container>
+            <a
+              href={project.clientUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group card relative flex flex-col gap-8 overflow-hidden p-8 transition-colors duration-500 hover:border-white/20 sm:flex-row sm:items-end sm:justify-between sm:p-12"
+            >
+              <div
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_70%_90%_at_100%_100%,#000,transparent)]"
+              />
+              <div className="flex flex-col gap-3">
+                <span className="text-sm text-fg-muted">Live at</span>
+                <span className="flex items-center gap-3 text-3xl font-medium tracking-[-0.03em] break-all text-fg sm:text-5xl">
+                  <Globe className="size-6 shrink-0 text-fg-muted sm:size-8" strokeWidth={1.5} />
+                  {projectHost(project)}
+                </span>
+              </div>
+              <span className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fg transition-colors duration-300 group-hover:border-fg group-hover:bg-fg group-hover:text-black">
+                Visit site
+                <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </a>
+          </Container>
+        </section>
+      )}
 
       {story.length > 0 && (
         <section className="py-20 sm:py-24">

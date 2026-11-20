@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { EASE_OUT } from "@/components/motion/reveal";
 
 const NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "Process", href: "/process" },
@@ -32,7 +33,7 @@ export function Navbar() {
   }, []);
 
   const activeHref = NAV_LINKS.find(
-    (link) => pathname === link.href || pathname.startsWith(`${link.href}/`)
+    (link) => pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`))
   )?.href;
   const pillHref = hovered ?? activeHref;
 

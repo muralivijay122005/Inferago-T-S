@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { Globe, Smartphone, Code2, Lock } from "lucide-react";
 import { EASE_OUT } from "@/components/motion/reveal";
 import { DitherField } from "@/components/ui/dither-field";
 import { PROJECTS } from "@/data/projects";
+import { projectHost } from "@/components/portfolio/project-card";
 import { cn } from "@/lib/utils";
 
 const CHIPS = [
@@ -38,7 +38,7 @@ export function HeroShowcase() {
   }, [active]);
 
   if (!project) return null;
-  const host = project.clientUrl ? new URL(project.clientUrl).host : `inferago.com/work/${project.slug}`;
+  const host = projectHost(project);
 
   return (
     <motion.div
@@ -102,36 +102,57 @@ export function HeroShowcase() {
             </div>
           </div>
 
-          {/* Screenshot */}
-          <Link href={`/work/${project.slug}`} className="group relative block aspect-video w-full bg-bg-secondary">
-            <AnimatePresence initial={false}>
+          {/* Project panel: typography on a dot grid, swapped as the cycle advances. */}
+          <Link
+            href={`/work/${project.slug}`}
+            className="group relative isolate block aspect-[4/3] w-full overflow-hidden bg-bg-secondary text-left sm:aspect-video"
+          >
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_80%_80%_at_100%_0%,#000,transparent)]"
+            />
+            <div
+              aria-hidden
+              className="absolute -top-1/3 -right-1/4 -z-10 size-[70%] rounded-full bg-[radial-gradient(circle,rgba(25,150,235,0.22),rgba(239,107,57,0.12)_45%,transparent_70%)] blur-2xl"
+            />
+
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={project.slug}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.9, ease: EASE_OUT }}
-                className="absolute inset-0"
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.6, ease: EASE_OUT }}
+                className="absolute inset-0 flex flex-col p-6 sm:p-10 lg:p-12"
               >
-                <Image
-                  src={project.coverImage}
-                  alt={`${project.name} website`}
-                  fill
-                  preload={active === 0}
-                  sizes="(min-width: 1024px) 1024px, 100vw"
-                  className="object-cover object-top"
-                />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {[project.type, project.industry].map((tag) => (
+                      <span key={tag} className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-fg/80">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="shrink-0 text-sm text-fg/30 tabular-nums">
+                    {String(active + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div className="mt-auto flex flex-col gap-3 sm:gap-4">
+                  <span className="text-xs text-fg-muted sm:text-sm">Recent work</span>
+                  <span className="text-4xl font-semibold tracking-[-0.04em] text-fg sm:text-6xl lg:text-7xl">
+                    {project.name}
+                  </span>
+                  <p className="line-clamp-2 max-w-xl text-sm leading-relaxed text-fg-muted sm:text-base">
+                    {project.description}
+                  </p>
+                </div>
               </motion.div>
             </AnimatePresence>
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-5 pt-16 sm:p-6 sm:pt-20">
-              <div className="flex flex-col text-left">
-                <span className="text-xs text-fg-muted">Recent work</span>
-                <span className="text-lg font-semibold tracking-tight text-fg sm:text-xl">{project.name}</span>
-              </div>
-              <span className="rounded-full border border-white/15 bg-black/50 px-3 py-1 text-xs text-fg backdrop-blur-md transition-colors group-hover:border-white/40">
-                View case study →
-              </span>
-            </div>
+
+            <span className="absolute right-6 bottom-6 hidden rounded-full border border-white/15 bg-black/50 px-3 py-1 text-xs text-fg backdrop-blur-md transition-colors group-hover:border-white/40 sm:right-10 sm:bottom-10 sm:block lg:right-12 lg:bottom-12">
+              View case study →
+            </span>
           </Link>
         </div>
 

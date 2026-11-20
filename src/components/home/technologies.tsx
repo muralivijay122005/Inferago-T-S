@@ -69,7 +69,7 @@ function Orbit({ active }: { active: string }) {
 
       <div className="absolute top-1/2 left-1/2 grid size-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-bg">
         <span style={{ animationDuration: "30s" }} className="orbit-cw absolute inset-2 rounded-full border border-dashed border-white/15" />
-        <Image src="/inferago-logo.png" alt="" width={1903} height={531} className="h-4 w-auto object-contain" />
+        <Image src="/favicon_infer.png" alt="" width={1080} height={1080} className="size-12 object-contain" />
       </div>
     </div>
   );

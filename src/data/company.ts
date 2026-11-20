@@ -9,5 +9,5 @@ export type CompanyContact = {
 
 // Only fill in channels that are actively monitored — see spec §30.
 export const COMPANY_CONTACT: CompanyContact = {
-  email: "inferago@gmail.com",
+  email: "contact@inferago.com",
 };

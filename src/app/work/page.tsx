@@ -20,8 +20,8 @@ export default function WorkPage() {
         <Container>
           {PROJECTS.length > 0 ? (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {PROJECTS.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
+              {PROJECTS.map((project, i) => (
+                <ProjectCard key={project.slug} project={project} index={i} />
               ))}
             </div>
           ) : (

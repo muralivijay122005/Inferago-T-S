@@ -15,7 +15,6 @@ export type Project = {
   timeline?: string;
   results?: string;
   clientUrl?: string;
-  coverImage: string;
 };
 
 // Minimal real entries — populated from each live site's own public
@@ -23,6 +22,40 @@ export type Project = {
 // approach/solution/results) hasn't been provided yet. Expand with that
 // detail once available rather than inventing it.
 export const PROJECTS: Project[] = [
+  {
+    slug: "grotec-agro",
+    name: "Grotec Agro",
+    client: "GROTEC Organic Private Limited",
+    industry: "Agriculture",
+    type: "CRM & HRMS Platform",
+    category: "software",
+    services: ["Custom Software"],
+    description:
+      "GROTEC FarmerOS, an integrated CRM and HRMS platform managing leads, customers, telecallers, attendance, payroll and KPIs across field operations.",
+    clientUrl: "https://crm.grotecagro.com",
+  },
+  {
+    slug: "perceptic",
+    name: "Perceptic",
+    industry: "Digital Marketing",
+    type: "Agency Website",
+    category: "web",
+    services: ["Website Development"],
+    description:
+      "A website for Perceptic, a digital marketing agency running data-driven audience targeting, performance advertising and analytics.",
+    clientUrl: "https://perceptic.vercel.app",
+  },
+  {
+    slug: "algodon-fashion",
+    name: "Algodon Fashion",
+    industry: "Fashion & Apparel",
+    type: "E-commerce Store",
+    category: "ecommerce",
+    services: ["E-commerce Development"],
+    description:
+      "An online store for Algodon Fashion's hand block-printed, 100% organic cotton shirts, crafted in India with botanical dyes.",
+    clientUrl: "https://www.algodonfashion.com",
+  },
   {
     slug: "care-dent",
     name: "Care Dent",
@@ -32,7 +65,6 @@ export const PROJECTS: Project[] = [
     services: ["Website Development"],
     description: "A website for Care Dent, a dental equipment and clinical solutions supplier.",
     clientUrl: "https://www.caredent.net",
-    coverImage: "/work/care-dent-site.jpg",
   },
   {
     slug: "feline-genuine-lubricants",
@@ -44,6 +76,5 @@ export const PROJECTS: Project[] = [
     description:
       "Premium industrial-grade engine oils and lubricants formulated to exceed international standards.",
     clientUrl: "https://felinelube.vercel.app",
-    coverImage: "/work/feline-lube-site.jpg",
   },
 ];
